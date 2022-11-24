@@ -20,7 +20,7 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> getAlgumaCoisaDoEndpoint() async {
     emit(HomeLoadingState());
-    await Future.delayed(const Duration(seconds: 8));
+    await Future.delayed(const Duration(seconds: 2));
     final random = Random();
     if (random.nextBool()) {
       return emit(HomeErrorState());

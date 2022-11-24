@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t01_bloc_counter/di/injection.dart';
 import 'package:t01_bloc_counter/home/home_cubit.dart';
 import 'package:t01_bloc_counter/home/home_states.dart';
 
@@ -17,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    controller = context.read<HomeCubit>();
+    controller = getIt.get<HomeCubit>();
   }
 
   @override
@@ -34,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             BlocConsumer<HomeCubit, HomeState>(
+              bloc: controller,
               listener: (context, state) {
                 if (state is HomeErrorState) {
                   ScaffoldMessenger.of(context).removeCurrentSnackBar();
