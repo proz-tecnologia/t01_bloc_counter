@@ -13,10 +13,12 @@
 import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:t01_bloc_counter/home/home_repository.dart';
 import 'package:t01_bloc_counter/home/home_states.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit() : super(HomeInitialState());
+  final HomeRepository repository;
+  HomeCubit(this.repository) : super(HomeInitialState());
 
   Future<void> getAlgumaCoisaDoEndpoint() async {
     emit(HomeLoadingState());

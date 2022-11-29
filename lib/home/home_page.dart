@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:t01_bloc_counter/di/injection.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:t01_bloc_counter/home/home_cubit.dart';
 import 'package:t01_bloc_counter/home/home_states.dart';
 
@@ -18,7 +18,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    controller = getIt.get<HomeCubit>();
+    //controller = getIt.get<HomeCubit>();
+    controller = Modular.get<HomeCubit>();
   }
 
   @override
@@ -50,9 +51,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                return Text(
-                  '$state',
-                  style: const TextStyle(fontSize: 32),
+                return Column(
+                  children: [
+                    Text(
+                      '$state',
+                      style: const TextStyle(fontSize: 32),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Modular.to.pushNamed('/home-detail');
+                      },
+                      child: const Text('navegar'),
+                    ),
+                  ],
                 );
               },
             ),
@@ -78,3 +89,17 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+class Robot {
+  void spinAround() {}
+  void rotate() {}
+  void antenas() {}
+}
+
+abstract class Cut {}
+
+abstract class Paint {}
+
+class MyRobot extends Robot implements Paint {}
+
+class MyRobot2 extends Robot implements Paint, Cut {}
